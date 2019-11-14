@@ -3,8 +3,11 @@
     "description": "",
     "keywords": [
         "laravel backpack",
+        "backpack",
         "crud"
     ],
+    "homepage": "https://github.com/onkbear/backpack-nested-crud",
+    "license": "MIT",
     "authors": [
         {
             "name": "onkbear",
