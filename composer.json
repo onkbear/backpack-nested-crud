@@ -1,0 +1,40 @@
+{
+    "name": "onkbear/backpack-nested-crud",
+    "description": "",
+    "keywords": [
+        "laravel backpack",
+        "crud"
+    ],
+    "authors": [
+        {
+            "name": "onkbear",
+            "email": "onkbear@gmail.com"
+        }
+    ],
+    "require": {
+        "backpack/crud": "^4.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.16"
+    },
+    "autoload": {
+        "psr-4": {
+            "Onkbear\\NestedCrud\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Onkbear\\NestedCrud\\NestedCrudServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "lint": [
+            "php-cs-fixer fix --dry-run ./src"
+        ],
+        "lint-fix": [
+            "php-cs-fixer fix ./src"
+        ]
+    }
+}
