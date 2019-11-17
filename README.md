@@ -1,12 +1,15 @@
 # Backpack Nested Crud
 
-This package gives nested CRUD operation on your edit page.
+[![Latest Stable Version](https://img.shields.io/packagist/v/onkbear/backpack-nested-crud.svg?style=flat-square)](https://packagist.org/packages/onkbear/backpack-nested-crud)
+[![Software License](https://img.shields.io/github/license/onkbear/backpack-nested-crud?style=flat-square)](LICENSE)
+
+This package gives nested CRUD operations on your edit page.
 
 Inspired by [Nested resources in Backpack CRUD](https://backpackforlaravel.com/articles/tutorials/nested-resources-in-backpack-crud)
 
 E.g.
 
-Gives the avility of CRUD operation of `comment` model as a field on `user` CRUD.
+Gives the avility of CRUD operations of `comment` model as a field on `user` edit page.
 
 Only supports [Laravel-Backpack/CRUD](https://github.com/Laravel-Backpack/CRUD) v4.
 
@@ -147,3 +150,23 @@ You have following routes.
 That's it.
 
 You can also use backpack operations into `UserCommentCrudController` or extend `CommentCrudController` if it is exist.
+
+## Customize views for list view
+
+There are two templates for list view.
+
+- `nested_crud::nested_list` : table view (default)
+- `nested_crud::nested_grid_list` : grid view
+
+If you would like to use grid view, simply use the set method below.
+
+``` php
+// UserCommentCrudController.php
+
+    protected function setupNestedListOperation()
+    {
+        $this->crud->setListView('nested_crud::nested_grid_list');
+    }
+```
+
+If you created view files with exace same name in `resources/views/vendor/backpack/nested_crud` folder, it will override.
