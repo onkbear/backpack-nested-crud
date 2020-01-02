@@ -13,6 +13,8 @@ Gives the avility of CRUD operations of `comment` model as a field on `user` edi
 
 Only supports [Laravel-Backpack/CRUD](https://github.com/Laravel-Backpack/CRUD) v4.
 
+![Demo](https://user-images.githubusercontent.com/6011203/71384896-04b19080-25dc-11ea-9c97-6ee38d31619c.gif)
+
 ## Install
 
 ``` bash
@@ -157,6 +159,8 @@ There are two templates for list view.
 
 - `nested_crud::nested_list` : table view (default)
 - `nested_crud::nested_grid_list` : grid view
+
+![Grid View](https://user-images.githubusercontent.com/6011203/71385071-15163b00-25dd-11ea-9b99-880d8f52af67.png)
 
 If you would like to use grid view, simply use the set method below.
 
