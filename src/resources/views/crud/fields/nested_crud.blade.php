@@ -99,7 +99,7 @@
   }
 
   (function () {
-    function highlightErrors(errors) {
+    function highlightErrors(formId, errors) {
 
       $.each(errors, function (property, messages) {
 
@@ -107,9 +107,9 @@
           return index === 0 ? item : '['+item+']';
         }).join('');
 
-        var field = $('[name="' + normalizedProperty + '[]"]').length ?
-                    $('[name="' + normalizedProperty + '[]"]') :
-                    $('[name="' + normalizedProperty + '"]'),
+        var field = $('#' + formId + ' [name="' + normalizedProperty + '[]"]').length ?
+                    $('#' + formId + ' [name="' + normalizedProperty + '[]"]') :
+                    $('#' + formId + ' [name="' + normalizedProperty + '"]'),
                     container = field.parents('.form-group');
 
         container.addClass('text-danger');
@@ -123,8 +123,19 @@
       });
     }
 
+    // Clear the hilighting made by highlightErrors()
+    function clearHighlighting(formId) {
+      $('#' + formId + ' .form-group.text-danger').each(function () {
+        $(this).find('.invalid-feedback').remove();
+        $(this).find('input, textarea').removeClass('is-invalid');
+        $(this).removeClass('text-danger');
+      });
+    }
+
     $('#{{ $createModalId }}Form').submit(function (e) {
       e.preventDefault();
+
+      clearHighlighting('{{ $createModalId }}Form');
 
       var formElement = $('#{{ $createModalId }}Form');
 
@@ -147,13 +158,15 @@
             text: "{{ trans('backpack::base.error') }}: " + data.responseJSON.message
           }).show();
 
-          highlightErrors(data.responseJSON.errors);
+          highlightErrors('{{ $createModalId }}Form', data.responseJSON.errors);
         }
       });
     });
 
     $('#{{ $editModalId }}Form').submit(function (e) {
       e.preventDefault();
+
+      clearHighlighting('{{ $editModalId }}Form');
 
       var formElement = $('#{{ $editModalId }}Form');
 
@@ -176,7 +189,7 @@
             text: "{{ trans('backpack::base.error') }}: " + data.responseJSON.message
           }).show();
 
-          highlightErrors(data.responseJSON.errors);
+          highlightErrors('{{ $editModalId }}Form', data.responseJSON.errors);
         }
       });
     });
