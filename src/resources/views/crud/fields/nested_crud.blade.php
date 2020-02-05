@@ -37,7 +37,8 @@
         enctype="multipart/form-data"
         @endif
       >
-        {!! csrf_field() !!}
+        @csrf
+        @method('PUT')
         <div class="modal-content">
           <div class="text-center">
             <div><span class="fa fa-spinner fa-spin"></span> Loading...</div>
@@ -137,12 +138,13 @@
 
       clearHighlighting('{{ $createModalId }}Form');
 
-      var formElement = $('#{{ $createModalId }}Form');
-
       $.ajax({
-        type: 'PUT',
-        url: formElement.attr('action'),
-        data: formElement.serialize(),
+        type: 'POST',
+        url: $(this).attr('action'),
+        data: new FormData($(this)[0]),
+        dataType: 'JSON',
+        processData: false,
+        contentType: false,
         success: function (data) {
           new Noty({
             type: "success",
@@ -168,12 +170,13 @@
 
       clearHighlighting('{{ $editModalId }}Form');
 
-      var formElement = $('#{{ $editModalId }}Form');
-
       $.ajax({
-        type: 'PUT',
-        url: formElement.attr('action'),
-        data: formElement.serialize(),
+        type: 'POST',
+        url: $(this).attr('action'),
+        data: new FormData($(this)[0]),
+        dataType: 'JSON',
+        processData: false,
+        contentType: false,
         success: function (data) {
           new Noty({
             type: "success",
