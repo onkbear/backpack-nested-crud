@@ -31,14 +31,13 @@
   <div class="modal fade" id="{{ $createModalId }}" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <form method="post"
-        action="{{ $routeBase.'/ajax/create' }}"
+        action="{{ $routeBase.'/ajax' }}"
         id="{{ $createModalId }}Form"
         @if ($crud->hasUploadFields('create'))
         enctype="multipart/form-data"
         @endif
       >
         @csrf
-        @method('PUT')
         <div class="modal-content">
           <div class="text-center">
             <div><span class="fa fa-spinner fa-spin"></span> Loading...</div>
