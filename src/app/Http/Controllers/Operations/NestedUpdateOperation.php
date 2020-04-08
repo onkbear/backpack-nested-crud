@@ -28,8 +28,8 @@ trait NestedUpdateOperation
         ]);
 
         Route::get($segment.'/ajax/{id}/translate/{lang}', [
-            'as'        => $routeName.'.translateItem',
-            'uses'      => $controller.'@translateItem',
+            'as'        => $routeName.'.nestedTranslateItem',
+            'uses'      => $controller.'@nestedTranslateItem',
             'operation' => 'nestedUpdate',
         ]);
     }
