@@ -21,12 +21,6 @@ trait NestedCreateOperation
             'operation' => 'nestedCreate',
         ]);
 
-        Route::put($segment.'/ajax/create', [
-            'as'        => $routeName.'.nestedStore',
-            'uses'      => $controller.'@nestedStore',
-            'operation' => 'nestedCreate',
-        ]);
-
         Route::post($segment.'/ajax', [
             'as'        => $routeName.'.nestedStore',
             'uses'      => $controller.'@nestedStore',
