@@ -173,4 +173,4 @@ If you would like to use grid view, simply use the set method below.
     }
 ```
 
-If you created view files with exace same name in `resources/views/vendor/backpack/nested_crud` folder, it will override.
+If you created view files with exact same name in `resources/views/vendor/backpack/nested_crud` folder, it will override.
