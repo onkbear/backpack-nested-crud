@@ -36,6 +36,7 @@ trait NestedCreateOperation
         $this->crud->allowAccess('create');
 
         $this->crud->operation('nestedCreate', function () {
+            $this->crud->setupDefaultSaveActions();
             $this->crud->setCreateView('nested_crud::modals.create');
         });
     }
