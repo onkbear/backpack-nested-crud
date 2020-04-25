@@ -132,69 +132,79 @@
       });
     }
 
-    $('#{{ $createModalId }}Form').submit(function (e) {
-      e.preventDefault();
+    function setupModalFormCreateEvent() {
+      var $createModalForm = $('#{{ $createModalId }}Form')
+      $($createModalForm).find('#saveButton').on('click', function () {
 
-      clearHighlighting('{{ $createModalId }}Form');
+        clearHighlighting('{{ $createModalId }}Form');
 
-      $.ajax({
-        type: 'POST',
-        url: $(this).attr('action'),
-        data: new FormData($(this)[0]),
-        dataType: 'JSON',
-        processData: false,
-        contentType: false,
-        success: function (data) {
-          new Noty({
-            type: "success",
-            text: "{{ trans('backpack::crud.insert_success') }}"
-          }).show();
+        $createModalForm.trigger('form-pre-serialize');
+        $createModalForm.find('.save-block').triggerHandler('click');
 
-          loadNestedCrudList($('#{{ $field['name'] }}'));
-          $('#{{ $createModalId }}').modal('hide');
-        },
-        error: function (data) {
-          new Noty({
-            type: "error",
-            text: "{{ trans('backpack::base.error') }}: " + data.responseJSON.message
-          }).show();
+        $.ajax({
+          type: 'POST',
+          url: $createModalForm.attr('action'),
+          data: new FormData($createModalForm[0]),
+          dataType: 'JSON',
+          processData: false,
+          contentType: false,
+          success: function (data) {
+            new Noty({
+              type: "success",
+              text: "{{ trans('backpack::crud.insert_success') }}"
+            }).show();
 
-          highlightErrors('{{ $createModalId }}Form', data.responseJSON.errors);
-        }
+            loadNestedCrudList($('#{{ $field['name'] }}'));
+            $('#{{ $createModalId }}').modal('hide');
+          },
+          error: function (data) {
+            new Noty({
+              type: "error",
+              text: "{{ trans('backpack::base.error') }}: " + data.responseJSON.message
+            }).show();
+
+            highlightErrors('{{ $createModalId }}Form', data.responseJSON.errors);
+          }
+        });
       });
-    });
+    }
 
-    $('#{{ $editModalId }}Form').submit(function (e) {
-      e.preventDefault();
+    function setupModalFormEditEvent() {
+      var $editModalForm = $('#{{ $editModalId }}Form')
+      $editModalForm.find('#saveButton').on('click', function (e) {
 
-      clearHighlighting('{{ $editModalId }}Form');
+        clearHighlighting('{{ $editModalId }}Form');
 
-      $.ajax({
-        type: 'POST',
-        url: $(this).attr('action'),
-        data: new FormData($(this)[0]),
-        dataType: 'JSON',
-        processData: false,
-        contentType: false,
-        success: function (data) {
-          new Noty({
-            type: "success",
-            text: "{{ trans('backpack::crud.update_success') }}"
-          }).show();
+        $editModalForm.trigger('form-pre-serialize');
+        $editModalForm.find('.save-block').triggerHandler('click');
 
-          loadNestedCrudList($('#{{ $field['name'] }}'));
-          $('#{{ $editModalId }}').modal('hide');
-        },
-        error: function (data) {
-          new Noty({
-            type: "error",
-            text: "{{ trans('backpack::base.error') }}: " + data.responseJSON.message
-          }).show();
+        $.ajax({
+          type: 'POST',
+          url: $editModalForm.attr('action'),
+          data: new FormData($editModalForm[0]),
+          dataType: 'JSON',
+          processData: false,
+          contentType: false,
+          success: function (data) {
+            new Noty({
+              type: "success",
+              text: "{{ trans('backpack::crud.update_success') }}"
+            }).show();
 
-          highlightErrors('{{ $editModalId }}Form', data.responseJSON.errors);
-        }
+            loadNestedCrudList($('#{{ $field['name'] }}'));
+            $('#{{ $editModalId }}').modal('hide');
+          },
+          error: function (data) {
+            new Noty({
+              type: "error",
+              text: "{{ trans('backpack::base.error') }}: " + data.responseJSON.message
+            }).show();
+
+            highlightErrors('{{ $editModalId }}Form', data.responseJSON.errors);
+          }
+        });
       });
-    });
+    }
 
     // Load modal content
     $('#{{ $createModalId }}').on('show.bs.modal', function (e) {
@@ -212,6 +222,8 @@
 
           // trigger the javascript for all fields that have their js defined in a separate method
           initializeFieldsWithJavascript('#{{ $createModalId }} form');
+
+          setupModalFormCreateEvent();
         }
       });
     });
@@ -224,7 +236,7 @@
         type: 'GET',
         success: function(data){
           var key = button.data('key');
-          $('#{{ $editModalId }} .modal-content').html($(data));
+          $('#{{ $editModalId }} .modal-content').html($(data).closest('#modal-content'));
           $('#{{ $editModalId }}Form').attr('action', '{{ $routeBase.'/ajax/' }}' + key)
 
           // Apply styles and scripts from modal contents
@@ -233,6 +245,8 @@
 
           // trigger the javascript for all fields that have their js defined in a separate method
           initializeFieldsWithJavascript('#{{ $editModalId }} form');
+
+          setupModalFormEditEvent();
         }
       });
     });

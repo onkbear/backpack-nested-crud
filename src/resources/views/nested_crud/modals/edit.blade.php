@@ -18,6 +18,8 @@
 @endsection
 
 @section('footer')
-  <button class="btn btn-secondary" type="button" data-dismiss="modal"><span class="fa fa-ban"></span> {{ trans('backpack::crud.cancel') }}</button>
-  <button class="btn btn-primary" type="submit"><span class="fa fa-save" role="presentation" aria-hidden="true"></span> {{ trans('backpack::crud.save') }}</button>
+  <div class="save-block">
+    <button class="btn btn-secondary" type="button" data-dismiss="modal"><span class="fa fa-ban"></span> {{ trans('backpack::crud.cancel') }}</button>
+    <button class="btn btn-primary" type="button" id="saveButton"><span class="fa fa-save" aria-hidden="true"></span> {{ trans('backpack::crud.save') }}</button>
+  </div>
 @endsection
