@@ -7,7 +7,7 @@
   $editModalId      = 'editModal'.$modelReflection->getShortName();
 @endphp
 
-<div @include('crud::inc.field_wrapper_attributes') >
+@include('crud::fields.inc.wrapper_start')
   <label>{!! $field['label'] !!}</label>
 
   {{-- List view --}}
@@ -40,7 +40,7 @@
         @csrf
         <div class="modal-content">
           <div class="text-center">
-            <div><span class="fa fa-spinner fa-spin"></span> Loading...</div>
+            <div><span class="la la-spinner la-spin"></span> Loading...</div>
           </div>
         </div>
       </form>
@@ -60,7 +60,7 @@
         {!! csrf_field() !!}
         {!! method_field('PUT') !!}
         <div class="modal-content">
-          <div><span class="fa fa-spinner fa-spin"></span> Loading...</div>
+          <div><span class="la la-spinner la-spin"></span> Loading...</div>
         </div>
       </form>
     </div>
@@ -71,7 +71,7 @@
   @if (isset($field['hint']))
     <p class="help-block">{!! $field['hint'] !!}</p>
   @endif
-</div>
+@include('crud::fields.inc.wrapper_end')
 
 {{-- ########################################## --}}
 {{-- Extra CSS and JS for this particular field --}}
@@ -80,7 +80,7 @@
 @push('crud_fields_scripts')
 <script>
   function getNestedCrudLoadingHtml() {
-    return '<div class="text-center"><div><span class="fa fa-spinner fa-spin"></span> Loading...</div></div>';
+    return '<div class="text-center"><div><span class="la la-spinner la-spin"></span> Loading...</div></div>';
   }
 
   function loadNestedCrudList(element) {

@@ -11,7 +11,7 @@ E.g.
 
 Gives the avility of CRUD operations of `comment` model as a field on `user` edit page.
 
-Only supports [Laravel-Backpack/CRUD](https://github.com/Laravel-Backpack/CRUD) v4.
+For [Laravel-Backpack/CRUD](https://github.com/Laravel-Backpack/CRUD) v4.0, please use `^1.1`.
 
 ![Demo](https://user-images.githubusercontent.com/6011203/71384896-04b19080-25dc-11ea-9c97-6ee38d31619c.gif)
 

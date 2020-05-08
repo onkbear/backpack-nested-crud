@@ -16,7 +16,7 @@
       data-remote="{{ $remoteUrl }}"
       data-key="{{ $entry->getKey() }}"
     >
-      <i class="fa fa-edit"></i> {{ trans('backpack::crud.edit') }}
+      <i class="la la-edit"></i> {{ trans('backpack::crud.edit') }}
     </button>
 
   @else
