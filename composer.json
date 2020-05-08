@@ -15,7 +15,7 @@
         }
     ],
     "require": {
-        "backpack/crud": "^4.1.0|^4.0.99"
+        "backpack/crud": "^4.1.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16"
