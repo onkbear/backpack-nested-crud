@@ -113,7 +113,7 @@
                     container = field.parents('.form-group');
 
         container.addClass('text-danger');
-        container.children('input, textarea').addClass('is-invalid');
+        container.children('input, textarea, select').addClass('is-invalid');
 
         $.each(messages, function(key, msg){
           // highlight the input that errored
@@ -127,7 +127,7 @@
     function clearHighlighting(formId) {
       $('#' + formId + ' .form-group.text-danger').each(function () {
         $(this).find('.invalid-feedback').remove();
-        $(this).find('input, textarea').removeClass('is-invalid');
+        $(this).children('input, textarea, select').removeClass('is-invalid');
         $(this).removeClass('text-danger');
       });
     }
