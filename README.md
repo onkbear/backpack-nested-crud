@@ -99,16 +99,17 @@ class UserCommentCrudController extends CrudController
 
     public function setup()
     {
-        // ...
+        // set the Eloquent object
+        CRUD::setModel(\App\Models\Comment::class);
 
         // get the user_id parameter
-        $user_id = \Route::current()->parameter('user_id');
+        $userId = \Route::current()->parameter('user_id');
 
         // set a different route for the admin panel buttons
-        CRUD::setRoute(config('backpack.base.route_prefix').'/user/'.$user_id.'/comment');
+        CRUD::setRoute(config('backpack.base.route_prefix').'/user/'.$userId.'/comment');
 
-        // show only that user's comments
-        CRUD::addClause('where', 'user_id', $user_id);
+        // show only specific user's comments
+        CRUD::addClause('where', 'user_id', $userId);
 
         // ...
     }
@@ -121,6 +122,16 @@ class UserCommentCrudController extends CrudController
     protected function setupNestedCreateOperation()
     {
         CRUD::setValidation(StoreRequest::class);
+
+        // get the user_id parameter
+        $userId = \Route::current()->parameter('user_id');
+
+        // add a foreign key field as a hidden field (may need only for create operation)
+        CRUD::addField([
+            'name' => 'user_id',
+            'type' => 'hidden',
+            'value' => $userId
+        ]);
 
         // ...
     }
