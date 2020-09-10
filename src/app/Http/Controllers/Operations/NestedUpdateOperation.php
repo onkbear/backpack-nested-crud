@@ -48,7 +48,7 @@ trait NestedUpdateOperation
                 $this->crud->addField([
                     'name' => 'locale',
                     'type' => 'hidden',
-                    'value' => $request()->input('locale') ?? app()->getLocale(),
+                    'value' => request()->input('locale') ?? app()->getLocale(),
                 ]);
             }
 
